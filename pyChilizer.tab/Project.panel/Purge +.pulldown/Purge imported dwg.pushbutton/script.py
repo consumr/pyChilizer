@@ -18,12 +18,17 @@ if len(cad_imports) == 0:
     forms.alert("No Imports, well done!")
 else:
     if forms.alert(message, ok=False, yes=True, no=True, exitscript=True):
+        failed = 0
         with revit.Transaction("Remove dwg imports"):
-            for id in cad_imports:
+            for cad_id in cad_imports:
                 try:
-                    doc.Delete(cad_imports)
-                except:
-                    continue
+                    doc.Delete(cad_id)
+                except Exception as ex:
+                    failed += 1
+                    print("Could not delete {}: {}".format(cad_id, ex))
+        if failed:
+            forms.alert("{} of {} imports could not be deleted. "
+                        "See the output window.".format(failed, len(cad_imports)))
 
 
 
