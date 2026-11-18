@@ -1,0 +1,9 @@
+title: "Purge imported dwg (verbose)"
+tooltip: |
+  Lists every imported (not linked) CAD instance, then deletes them one at a
+  time in separate transactions, logging each step to the output window and
+  to a log file in %TEMP% (flushed before every delete, so it survives a crash).
+  Skips group members and elements you can't edit in a workshared model.
+  Shift+Click: report only, delete nothing.
+
+  Based on pyChilizer's "Purge imported dwg" by Deyan Nenov.
